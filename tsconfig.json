@@ -12,6 +12,7 @@
       "@controllers/*": ["./src/controllers/*"],
       "@models/*": ["./src/models/*"],
       "@views/*": ["./src/views/*"],
+      "@database/*": ["./src/database/*"],
       "@config/*": ["./src/config/*"]
     },
     "typeRoots": ["./node_modules/@types", "./src/@types"],
