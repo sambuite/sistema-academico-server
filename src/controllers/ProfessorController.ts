@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import pool from '@database/connection';
 import { hash } from 'bcryptjs';
 
-export class UsersController {
+export class ProfessorController {
   async create(req: Request, res: Response) {
     const db = await pool.connect();
 
@@ -13,7 +13,7 @@ export class UsersController {
       console.log('hashedPassword', hashedPassword);
       if (name && login && password && hashedPassword)
         db.query(
-          `INSERT INTO tb_usuario(nome, login, senha) VALUES($1, $2, $3);`,
+          `INSERT INTO tb_professor(nome, login, senha) VALUES($1, $2, $3);`,
           [name, login, hashedPassword],
           (error, result) => {
             if (error) {
@@ -41,7 +41,7 @@ export class UsersController {
     try {
       if (Object.keys(query).length) {
         db.query(
-          'SELECT * FROM tb_usuario ORDER BY id LIMIT $1 OFFSET $2;',
+          'SELECT * FROM tb_professor ORDER BY id LIMIT $1 OFFSET $2;',
           [query.skip, query.take],
           (error, result) => {
             if (error) {
@@ -59,7 +59,7 @@ export class UsersController {
           },
         );
       } else {
-        db.query('SELECT * FROM tb_usuario;', (error, result) => {
+        db.query('SELECT * FROM tb_professor;', (error, result) => {
           if (error) {
             throw error;
           }
@@ -88,7 +88,7 @@ export class UsersController {
     try {
       if (name && login && password)
         db.query(
-          'UPDATE tb_usuario SET nome = $1, login = $2, senha = $3 WHERE id = $4',
+          'UPDATE tb_professor SET nome = $1, login = $2, senha = $3 WHERE id = $4',
           [name, login, password, id],
           (error, result) => {
             if (error) {
@@ -114,7 +114,7 @@ export class UsersController {
 
     if (id)
       db.query(
-        'DELETE FROM tb_usuario WHERE id = $1;',
+        'DELETE FROM tb_professor WHERE id = $1;',
         [id],
         (error, result) => {
           if (error) {
